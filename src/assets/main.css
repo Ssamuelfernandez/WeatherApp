@@ -1,0 +1,106 @@
+
+/* Estilos para el tema claro */
+.light {
+  --background-color: rgb(238, 238, 238);
+  --text-color: rgb(37, 37, 37);
+}
+
+/* Estilos para el tema oscuro */
+.dark {
+  --background-color: rgb(49, 49, 49);
+  --text-color: rgb(241, 241, 241);
+}
+
+#app {
+  width: 100%;
+  height: 100vh;
+}
+
+.main-container {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+}
+
+.menu-container {
+  position: absolute;
+  left: 0;
+  width: 20%;
+  height: 100vh;
+  background-color: rgb(196, 196, 196);
+}
+
+.menu-container .theme {
+  position: absolute;
+  bottom: 0;
+  margin-left: 1rem;
+}
+
+.info-container {
+  position: absolute;
+  right: 20%;
+  width: 60%;
+  height: 100vh;
+  background-color: var(--background-color);
+  color: var(--text-color);
+}
+
+.info-subcoontainer {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.menu-title {
+  text-align: center;
+}
+
+.date {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.more-info-container {
+  display: flex;
+  gap: 2rem;
+}
+
+.more-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.info-subcoontainer-week {
+  position: absolute;
+  right: 0;
+  width: 20%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  background-color: var(--background-color);
+  color: var(--text-color);
+}
+
+.week-container {
+  height: 4rem;
+  background-color: #97bbc9;
+}
+
+
+.week-items {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+}
+
+
+
+
