@@ -1,12 +1,15 @@
 <template>
     <div class="main-container" :class="state.theme">
 
-        <MenuContainer @theme-changed="updateTheme" />
+        <SearchContainer @theme-changed="updateTheme" @search-city="updateCity" />
 
         <div class="info-container">
             <div class="info-subcoontainer">
+                <v-btn icon size="x-small" class="pin" variant="outlined"><i class="fa-solid fa-heart fa-xl"></i></v-btn>
                 <h1>{{ state.cityName }}</h1>
-                <!-- Boton icono de una chincheta -->
+
+
+
                 <div class="date">
                     <h3>{{ state.day }} {{ state.numDay }} </h3>
                     <h3>{{ state.time }}</h3>
@@ -52,39 +55,41 @@
 
         <div class="info-subcoontainer-week">
             <div v-for="(forecasts, dayName) in groupedByDay" :key="dayName">
-                <h2>{{ dayName }} {{ getDateInfo(forecasts[0].dt).day }}</h2>
-                <v-window v-model="activeWindow[dayName]" class="week-container">
-
-                    <v-window-item v-for="(forecast, index) in forecasts" :key="forecast.dt" :value="index" class="week-items">
+                <h3>{{ dayName }} {{ getDateInfo(forecasts[0].dt).day }}</h3>
+                <div class="window-container">
+                    <button
+                        @click="activeWindow[dayName] = (activeWindow[dayName] - 1 + forecasts.length) % forecasts.length"
+                        class="carousel-arrow"><i class="fa-solid fa-chevron-left"></i></button>
+                    <v-window v-model="activeWindow[dayName]" class="week-container">
+                        <v-window-item v-for="(forecast, index) in forecasts" :key="forecast.dt" :value="index"
+                            class="week-items">
 
                             <h3>{{ getDateInfo(forecast.dt).time }}</h3>
                             <p>{{ forecast.main.temp }}°C</p>
-                  
-                    </v-window-item>
 
-                </v-window>
+                        </v-window-item>
+                    </v-window>
+                    <button @click="activeWindow[dayName] = (activeWindow[dayName] + 1) % forecasts.length"
+                        class="carousel-arrow"><i class="fa-solid fa-chevron-right"></i></button>
+                </div>
 
-                <v-btn @click="activeWindow[dayName] = (activeWindow[dayName] - 1 + forecasts.length) % forecasts.length"
-                    class="carousel-arrow">Anterior</v-btn>
-                <v-btn @click="activeWindow[dayName] = (activeWindow[dayName] + 1) % forecasts.length"
-                    class="carousel-arrow">Siguiente</v-btn>
             </div>
         </div>
-
 
     </div>
 </template>
   
 <script setup>
-import MenuContainer from '../views/search.vue'
+import SearchContainer from '../views/search.vue'
 
 import { reactive, ref } from 'vue';
 import axios from 'axios';
 import { getDateInfo } from '../composables/dateInfo'
+import { onMounted } from 'vue';
 
 const state = reactive({
     theme: '',
-    inputName: 'malaga',
+    inputName: 'Málaga',
     iconData: '',
     cityName: '',
     day: '',
@@ -106,15 +111,25 @@ const updateTheme = (newTheme) => {
     state.theme = newTheme;
 };
 
-let groupedByDay = {};
+//Metodo para actualizar ciudad
+const updateCity = (newCity) => {
+    state.inputName = newCity;
+    obtenerDatos();
+};
+
+let groupedByDay = reactive({});
 let activeWindow = reactive({});
 
+onMounted(() => {
+    obtenerDatos();
+});
 
-const apiKey = '01408b16000e17a8e9420187ac1c7e5c';
-const currentWeather = `https://api.openweathermap.org/data/2.5/weather?q=${state.inputName}&appid=${apiKey}&units=metric `;
-const hourlyForecast = `https://api.openweathermap.org/data/2.5/forecast?q=${state.inputName}&appid=${apiKey}&units=metric `;
 
 const obtenerDatos = async () => {
+    const apiKey = '01408b16000e17a8e9420187ac1c7e5c';
+    const currentWeather = `https://api.openweathermap.org/data/2.5/weather?q=${state.inputName}&appid=${apiKey}&units=metric `;
+    const hourlyForecast = `https://api.openweathermap.org/data/2.5/forecast?q=${state.inputName}&appid=${apiKey}&units=metric `;
+
     try {
         const responseHourlyForecast = await axios.get(hourlyForecast);
         const hourlyForecastData = responseHourlyForecast.data.list;
@@ -174,7 +189,6 @@ const obtenerDatos = async () => {
     }
 };
 
-obtenerDatos();
 
 
 </script>
