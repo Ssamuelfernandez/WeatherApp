@@ -71,6 +71,7 @@
   display: flex;
   align-items: center;
   gap: 1rem;
+  margin-top: -1.3em;
 }
 
 .more-info-container {
@@ -116,7 +117,6 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 1em;
 }
 
 .search {
