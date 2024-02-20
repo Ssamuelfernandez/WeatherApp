@@ -1,17 +1,25 @@
 <template>
     <div class="info-container">
         <div class="info-subcoontainer">
-            <v-btn icon size="x-small" class="pin" variant="outlined"><i class="fa-solid fa-heart fa-xl"></i></v-btn>
-            <h1>{{ state.cityName }}</h1>
+            <div class="currentPin">
+                <button @click="isFavoriteCity(state.cityName) ? removeFavoriteCity(state.cityName) : addFavoriteCity(state.cityName)">
+                    <i v-if="isFavoriteCity(state.cityName)" class="fa-solid fa-heart fa-xl"></i>
+                    <i v-else class="fa-regular fa-heart fa-xl"></i>
+                </button>
+            </div>
+            <h1 class="cityName">{{ state.cityName }}</h1>
             <div class="date">
                 <h3>{{ state.day }} {{ state.numDay }} </h3>
                 <h3>{{ state.time }}</h3>
             </div>
-            <div>
+            <div class="currentIcon">
                 <img :src="state.iconData" alt="Weather icon">
             </div>
-            <h3>{{ state.weType }}</h3>
-            <h1>{{ state.tem }} °C</h1>
+            <div class="currentTem">
+                <h1>{{ state.tem }} °C</h1>
+                <h3>{{ state.weType }}</h3>
+            </div>
+
 
             <div class="more-info-container">
 
@@ -42,7 +50,10 @@
 
             </div>
         </div>
-
+        <div class="arrow">
+            <i class="fa-solid fa-angles-down"></i>
+        </div>
+        
     </div>
 </template>
 
@@ -50,7 +61,13 @@
 import { defineProps } from 'vue'
 
 const props = defineProps({
-  state: Object
+    state: Object,
+    addFavoriteCity: Function,
+    removeFavoriteCity: Function,
 })
+
+const isFavoriteCity = (cityName) => {
+    return props.state.favoriteCities.includes(cityName);
+}
 
 </script>

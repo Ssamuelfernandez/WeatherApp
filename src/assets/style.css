@@ -1,0 +1,201 @@
+/* Estilos para el tema claro */
+.light {
+    --background-color: #e0e0e0;
+    --text-color: #2c2c2c;
+    --box-light: #ffffff;
+    --box-shadow: #bebebe;
+}
+
+/* Estilos para el tema oscuro */
+.dark {
+    --background-color: #2c2c2c;
+    --text-color: #e0e0e0;
+    --box-light: #444444;
+    --box-shadow: #202020;
+}
+
+#app {
+    width: 100%;
+    height: 100vh;
+    font-size: 14px;
+}
+.main-container {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+}
+.menu-btn {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    z-index: 1;
+    font-size: 26px;
+    cursor: pointer;
+}
+.menu {
+    height: 100vh;
+    width: 0;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 60px;
+}
+.menu-container {
+    position: absolute;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    padding: 2em;
+}
+.menu-subContainer {
+    height: 100%;
+    width: 100%;
+    padding: 2em;
+    border-radius: 50px;
+    background: var(--background-color);
+    box-shadow: 20px 20px 50px var(--box-shadow),
+        -20px -20px 50px var(--box-light);
+}
+.closeMenu {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 1em;
+}
+.search {
+    display: flex;
+    gap: 1em;
+    align-items: center;
+  }
+.theme {
+    position: absolute;
+    bottom: 1em;
+    left: 4em;
+}
+.favCity-container, .lastCity-container {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5em;
+}
+.favCity, .lastCity {
+    height: 2.2em;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-inline: 1em;
+    border-radius: 50px;
+    background: var(--background-color);
+    box-shadow: inset 15px 15px 40px var(--box-shadow),
+        inset -15px -15px 40px var(--box-light);
+}
+.info-container {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    text-align: center;
+    padding: 2em;
+    gap: 1em;
+    background-color: var(--background-color);
+    color: var(--text-color);
+}
+.arrow {
+    display: block;
+    margin-bottom: -1em;
+}
+.info-subcoontainer {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    border-radius: 50px;
+    background: var(--background-color);
+    box-shadow: 20px 20px 50px var(--box-shadow),
+        -20px -20px 50px var(--box-light);
+}
+.currentPin {
+    position: absolute;
+    top: 3.5em;
+    right: 3.5em;
+    padding: 0.5em;
+
+    border-radius: 50%;
+    background: var(--background-color);
+    box-shadow: 20px 20px 30px var(--box-shadow),
+        -20px -20px 30px var(--box-light);
+}
+.cityName {
+    margin-top: 1.5em;
+}
+.date {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-top: -2em;
+}
+.currentIcon {
+    border-radius: 50%;
+    background: var(--background-color);
+    box-shadow: 15px 15px 40px var(--box-shadow),
+        -15px -15px 40px var(--box-light);
+}
+.more-info-container {
+    width: 90%;
+    height: auto;
+    padding: 1em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    gap: 1em;
+}
+.more-info {
+    min-width: 90%;
+    min-height: 2.5em;
+    display: flex;
+    align-items: center;
+    gap: 1em;
+    padding-inline-start: 1.2em;
+    border-radius: 50px;
+    background: var(--background-color);
+    box-shadow: inset 15px 15px 40px var(--box-shadow),
+        inset -15px -15px 40px var(--box-light);
+}
+.info-subcoontainer-week {
+    width: 100%;
+    height: 100vh;
+    padding: 1em;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    justify-content: space-between;
+    background-color: var(--background-color);
+    color: var(--text-color);
+}
+.window-container {
+    display: flex;
+    padding-inline: 1em;
+
+    border-radius: 50px;
+    background: var(--background-color);
+    box-shadow: 20px 20px 60px var(--box-shadow),
+        -20px -20px 60px var(--box-light);
+}
+.week-container {
+    width: 100%;
+    height: auto;
+}
+.week-items {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

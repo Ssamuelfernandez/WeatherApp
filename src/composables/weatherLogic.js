@@ -6,9 +6,10 @@ export default function useWeatherLogic() {
 
     const state = reactive({
         theme: 'light',
-        inputName: 'Málaga',
+        inputName: 'Madrid',
         activeWindow: {},
         lastSearches: JSON.parse(localStorage.getItem('lastSearches')) || [],
+        favoriteCities: JSON.parse(localStorage.getItem('favoriteCities')) || [],
 
     })
 
@@ -21,6 +22,24 @@ export default function useWeatherLogic() {
     const updateCity = async (newCity) => {
         state.inputName = newCity;
         await getInformation();
+        
+    };
+
+    // Método para agregar ciudad a favoritos
+    const addFavoriteCity = (city) => {
+        if (!state.favoriteCities.includes(city) && state.favoriteCities.length < 6) {
+            state.favoriteCities.push(city);
+            localStorage.setItem('favoriteCities', JSON.stringify(state.favoriteCities));
+        }
+    };
+
+    // Método para eliminar ciudad de favoritos
+    const removeFavoriteCity = (city) => {
+        const index = state.favoriteCities.indexOf(city);
+        if (index > -1) {
+            state.favoriteCities.splice(index, 1);
+            localStorage.setItem('favoriteCities', JSON.stringify(state.favoriteCities));
+        }
     };
 
     // Función para obtener la información
@@ -69,14 +88,15 @@ export default function useWeatherLogic() {
         });
 
         // Agrego la búsqueda exitosa a las últimas búsquedas
-        state.lastSearches.unshift(name);  // Almaceno nombre
-        if (state.lastSearches.length > 6) {
-            state.lastSearches.pop();  // Las últimas 6 búsquedas
+        if (!state.lastSearches.includes(name)) {
+            state.lastSearches.unshift(name);  // Almaceno nombre
+            if (state.lastSearches.length > 4) {
+                state.lastSearches.pop();  // Las últimas 6 búsquedas
+            }
+            localStorage.setItem('lastSearches', JSON.stringify(state.lastSearches));
         }
-
-        localStorage.setItem('lastSearches', JSON.stringify(state.lastSearches));
         
-        console.log(state.lastSearches)
+        // console.log(state.lastSearches)
 
         hourlyForecastData.forEach(hourlyData => {
             let dayName = getDateInfo(hourlyData.dt).dayName;
@@ -96,6 +116,8 @@ export default function useWeatherLogic() {
         updateTheme,
         updateCity,
         getInformation,
+        addFavoriteCity,
+        removeFavoriteCity,
     }
 
 }
