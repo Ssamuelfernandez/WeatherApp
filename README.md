@@ -1,29 +1,16 @@
-# WeatherApp
+# ☀️ About the Project
 
-This template should help get you started developing with Vue 3 in Vite.
+## Neomorph Weather App
 
-## Recommended IDE Setup
+Neomorph Weather App is a weather application that provides you with detailed current weather updates and less detailed forecasts for the coming days. It uses the OpenWeatherMap API to fetch weather data.
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
+With Neomorph Weather App, you can:
 
-## Customize configuration
+- View detailed current weather updates.
+- Get less detailed forecasts for the coming days.
+- See a list of recently viewed cities.
+- Add or remove cities from your favorites list.
+- Use geolocation to get weather updates for your current location.
+- Switch between dark and light themes.
 
-See [Vite Configuration Reference](https://vitejs.dev/config/).
-
-## Project Setup
-
-```sh
-npm install
-```
-
-### Compile and Hot-Reload for Development
-
-```sh
-npm run dev
-```
-
-### Compile and Minify for Production
-
-```sh
-npm run build
-```
+Neomorph Weather App is designed with a neomorphic style that has been trending for some time now.
