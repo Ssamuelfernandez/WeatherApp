@@ -62,12 +62,8 @@ const props = defineProps({
 });
 
 const closeMenu = () => {
-    const menuBtn = document.getElementById("menuBtn");
-    if(menuBtn.offsetParent !== null){
        const closeBtn = document.getElementById('closeBtn');
     if (closeBtn) closeBtn.click(); 
-    }
-    
 }
 
 const location = () => {
