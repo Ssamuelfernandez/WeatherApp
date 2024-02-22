@@ -1,17 +1,35 @@
 <template>
     <div class="info-container">
+        <div v-show="state.maxFav" class="banner-container">
+            <v-banner class="banner" rounded="lg" max-width="90%" elevation="2" lines="one"
+                text="Maximum favorite cities!" :stacked="false">
+                <template v-slot:actions>
+                    <v-btn @click="state.maxFav = false">Close</v-btn>
+                </template>
+            </v-banner>
+        </div>
+
         <div class="info-subcoontainer">
-            <div class="currentPin">
-                <button @click="isFavoriteCity(state.cityName) ? removeFavoriteCity(state.cityName) : addFavoriteCity(state.cityName)">
-                    <i v-if="isFavoriteCity(state.cityName)" class="fa-solid fa-heart fa-xl"></i>
-                    <i v-else class="fa-regular fa-heart fa-xl"></i>
-                </button>
+
+            <div class="pin-container">
+                <div class="currentPin">
+                    <button
+                        @click="isFavoriteCity(state.cityName) ? removeFavoriteCity(state.cityName) : addFavoriteCity(state.cityName)">
+                        <i v-if="isFavoriteCity(state.cityName)" class="fa-solid fa-heart fa-xl"></i>
+                        <i v-else class="fa-regular fa-heart fa-xl"></i>
+                    </button>
+                </div>
             </div>
-            <h1 class="cityName">{{ state.cityName }}</h1>
-            <div class="date">
-                <h3>{{ state.day }} {{ state.numDay }} </h3>
-                <h3>{{ state.time }}</h3>
+
+            <div>
+                <h1>{{ state.cityName }}</h1>
+                <div class="date">
+                    <h3>{{ state.day }} {{ state.numDay }} </h3>
+                    <h3>{{ state.time }}</h3>
+                </div>
             </div>
+
+
             <div class="currentIcon">
                 <img :src="state.iconData" alt="Weather icon">
             </div>
@@ -37,7 +55,7 @@
                 </div>
                 <div class="more-info">
                     <i class="fa-solid fa-wind"></i>
-                    <h3>{{ state.wind }}m/s</h3>
+                    <h3>{{ state.wind }} m/s</h3>
                 </div>
                 <div class="more-info">
                     <i class="fa-solid fa-temperature-arrow-up"></i>
@@ -53,7 +71,7 @@
         <div class="arrow">
             <i class="fa-solid fa-angles-down"></i>
         </div>
-        
+
     </div>
 </template>
 
@@ -71,3 +89,15 @@ const isFavoriteCity = (cityName) => {
 }
 
 </script>
+
+<style scoped>
+.banner-container {
+    display: flex;
+    justify-content: center;
+}
+
+.banner {
+    background-color: var(--background-color);
+    color: var(--text-color);
+}
+</style>

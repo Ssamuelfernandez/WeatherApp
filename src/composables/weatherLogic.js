@@ -5,11 +5,12 @@ import { getCoordinates, getCurrentWeatherByCity, getCurrentWeatherByCoordinates
 export default function useWeatherLogic() {
 
     const state = reactive({
-        theme: 'light',
+        theme: 'light-simple',
         inputName: 'Madrid',
         activeWindow: {},
         lastSearches: JSON.parse(localStorage.getItem('lastSearches')) || [],
         favoriteCities: JSON.parse(localStorage.getItem('favoriteCities')) || [],
+        maxFav: false,
 
     })
 
@@ -30,6 +31,13 @@ export default function useWeatherLogic() {
         if (!state.favoriteCities.includes(city) && state.favoriteCities.length < 6) {
             state.favoriteCities.push(city);
             localStorage.setItem('favoriteCities', JSON.stringify(state.favoriteCities));
+            state.maxFav = false;
+            console.log('Ciudad fav añadida!!')
+            console.log(state.maxFav);
+        }else{
+            state.maxFav = true;
+            console.log('Numero max alcanzado!!')
+            console.log(state.maxFav);
         }
     };
 
