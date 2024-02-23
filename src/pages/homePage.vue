@@ -23,7 +23,6 @@ import CurrentWeatherContainer from '../views/currentWeather.vue'
 import ForecastContainer from '../views/forecast.vue'
 import useWeatherLogic from '../composables/weatherLogic'
 import useMenuLogic from '../composables/menuLogic'
-import {  } from 'vue';
 
 const { state, updateTheme, updateCity, getInformation, addFavoriteCity, removeFavoriteCity, } = useWeatherLogic();
 

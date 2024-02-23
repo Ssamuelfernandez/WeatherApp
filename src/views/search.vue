@@ -69,8 +69,6 @@ const closeMenu = () => {
     }
 }
 
-
-
 const location = () => {
     props.getInformation(true);
     closeMenu();
