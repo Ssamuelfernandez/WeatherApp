@@ -63,8 +63,36 @@
     background-color: var(--background-color);
     color: var(--text-color);
     overflow-x: hidden;
-    transition: 0.5s;
+    transition: width 1s;
     padding-top: 60px;
+    animation: fadeOutLeft 1s;
+}
+
+.menu-open {
+    width: 100%;
+    animation: fadeInLeft 1s;
+}
+
+@keyframes fadeInLeft {
+    0% {
+        opacity: 0;
+        transform: translateX(-20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes fadeOutLeft {
+    0% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+    100% {
+        opacity: 0;
+        transform: translateX(-20px);
+    }
 }
 
 .menu-container {

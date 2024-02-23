@@ -3,7 +3,7 @@
 
         <div class="menu-subContainer">
 
-            <button id="closeBtn" class="closeMenu"><i class="fa-solid fa-xmark fa-xl"></i></button>
+            <button @click="state.menuOpen = false" class="closeMenu"><i class="fa-solid fa-xmark fa-xl"></i></button>
 
             <div class="menu-title">
                 <i class="fa-solid fa-cloud-sun-rain"></i>
@@ -63,10 +63,7 @@ const props = defineProps({
 });
 
 const closeMenu = () => {
-    const closeBtn = document.getElementById('closeBtn');
-    if (closeBtn && window.getComputedStyle(closeBtn).display !== 'none') {
-        closeBtn.click(); 
-    }
+    props.state.menuOpen = false;
 }
 
 const location = () => {

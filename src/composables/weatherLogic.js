@@ -12,6 +12,7 @@ export default function useWeatherLogic() {
         favoriteCities: JSON.parse(localStorage.getItem('favoriteCities')) || [],
         maxFav: false,
         loading: false,
+        menuOpen: false,
 
     })
 
