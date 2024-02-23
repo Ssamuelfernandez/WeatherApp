@@ -11,6 +11,7 @@ export default function useWeatherLogic() {
         lastSearches: JSON.parse(localStorage.getItem('lastSearches')) || [],
         favoriteCities: JSON.parse(localStorage.getItem('favoriteCities')) || [],
         maxFav: false,
+        loading: false,
 
     })
 
@@ -28,16 +29,12 @@ export default function useWeatherLogic() {
 
     // Método para agregar ciudad a favoritos
     const addFavoriteCity = (city) => {
-        if (!state.favoriteCities.includes(city) && state.favoriteCities.length < 6) {
+        if (!state.favoriteCities.includes(city) && state.favoriteCities.length < 4) {
             state.favoriteCities.push(city);
             localStorage.setItem('favoriteCities', JSON.stringify(state.favoriteCities));
             state.maxFav = false;
-            console.log('Ciudad fav añadida!!')
-            console.log(state.maxFav);
         }else{
             state.maxFav = true;
-            console.log('Numero max alcanzado!!')
-            console.log(state.maxFav);
         }
     };
 
@@ -53,11 +50,12 @@ export default function useWeatherLogic() {
     // Función para obtener la información
     const getInformation = async (useCoordinates = false) => {
         try {
+            state.loading = true;
             const coordinates = useCoordinates ? await getCoordinates() : null;
             const currentWeatherData = useCoordinates ? await getCurrentWeatherByCoordinates(coordinates.lat, coordinates.lon) : await getCurrentWeatherByCity(state.inputName);
             const hourlyForecastData = useCoordinates ? await getHourlyForecastByCoordinates(coordinates.lat, coordinates.lon) : await getHourlyForecastByCity(state.inputName);
-
             assignData(currentWeatherData, hourlyForecastData)
+            state.loading = false;
         } catch (error) {
             console.error('ERROR:' + error);
         }
@@ -81,11 +79,11 @@ export default function useWeatherLogic() {
         Object.assign(state, {
             cityName: name,
             weType: description.charAt(0).toUpperCase() + description.slice(1),
-            tem: temp,
+            tem: parseFloat(temp.toFixed(1)),
             hum: humidity,
             wind: speed,
-            maxTem: temp_max,
-            minTem: temp_min,
+            maxTem: parseFloat(temp_max.toFixed(1)),
+            minTem: parseFloat(temp_min.toFixed(1)),
             sunset: sunsetInfo.time,
             sunrise: sunriseInfo.time,
             day: dateInfo.dayName.charAt(0).toUpperCase() + dateInfo.dayName.slice(1),
@@ -103,8 +101,6 @@ export default function useWeatherLogic() {
             }
             localStorage.setItem('lastSearches', JSON.stringify(state.lastSearches));
         }
-        
-        // console.log(state.lastSearches)
 
         hourlyForecastData.forEach(hourlyData => {
             let dayName = getDateInfo(hourlyData.dt).dayName;

@@ -6,6 +6,7 @@
             <button id="closeBtn" class="closeMenu"><i class="fa-solid fa-xmark fa-xl"></i></button>
 
             <div class="menu-title">
+                <i class="fa-solid fa-cloud-sun-rain"></i>
                 <h2>Weather App</h2>
             </div>
 
@@ -13,7 +14,7 @@
             <div class="search">
                 <v-btn icon size="x-small" @click="location"><i class="fa-solid fa-location-dot fa-xl btn-text"></i></v-btn>
                 <v-text-field class="text-field" v-model="city" variant="underlined" clear-icon="fas fa-xmark" clearable
-                    append-inner-icon="fas fa-search" @onlick:append-inner="sendCity"
+                    append-inner-icon="fas fa-search" @click:append-inner="sendCity"
                     @keyup.enter="sendCity"></v-text-field>
             </div>
 
@@ -24,8 +25,8 @@
                     <h3 type="button" @click="updateCity(lastSearche)">{{ lastSearche }}</h3>
                 </div>
             </div>
-            <hr>
-            <div class="favCity-container">
+            <hr v-if="state.favoriteCities && state.favoriteCities.length > 0">
+            <div v-if="state.favoriteCities && state.favoriteCities.length > 0" class="favCity-container">
                 <h2>Favorite cities</h2>
                 <div v-for="(favoriteCity, index) in state.favoriteCities" :key="index" class="favCity">
 
@@ -62,9 +63,13 @@ const props = defineProps({
 });
 
 const closeMenu = () => {
-       const closeBtn = document.getElementById('closeBtn');
-    if (closeBtn) closeBtn.click(); 
+    const closeBtn = document.getElementById('closeBtn');
+    if (closeBtn && window.getComputedStyle(closeBtn).display !== 'none') {
+        closeBtn.click(); 
+    }
 }
+
+
 
 const location = () => {
     props.getInformation(true);

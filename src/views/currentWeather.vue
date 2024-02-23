@@ -34,7 +34,7 @@
                 <img :src="state.iconData" alt="Weather icon">
             </div>
             <div class="currentTem">
-                <h1>{{ state.tem }} °C</h1>
+                <h1>{{ state.tem }}°C</h1>
                 <h3>{{ state.weType }}</h3>
             </div>
 
@@ -59,11 +59,11 @@
                 </div>
                 <div class="more-info">
                     <i class="fa-solid fa-temperature-arrow-up"></i>
-                    <h3>{{ state.maxTem }} °C</h3>
+                    <h3>{{ state.maxTem }}°C</h3>
                 </div>
                 <div class="more-info">
                     <i class="fa-solid fa-temperature-arrow-down"></i>
-                    <h3>{{ state.minTem }} °C</h3>
+                    <h3>{{ state.minTem }}°C</h3>
                 </div>
 
             </div>
@@ -97,7 +97,7 @@ const isFavoriteCity = (cityName) => {
 }
 
 .banner {
-    background-color: var(--background-color);
+    background: linear-gradient(145deg, var(--box-shadow), var(--box-light));
     color: var(--text-color);
 }
 </style>
