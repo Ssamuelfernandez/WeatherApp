@@ -76,11 +76,14 @@ const updateCity = (city) => {
     closeMenu();
 }
 
-const sendCity = () => {
+const sendCity = (event) => {
+    
     if (city.value !== "") {
+        event.target.blur();
         props.updateCity(city.value);
         city.value = '';
         closeMenu();
+
     }
 };
 
