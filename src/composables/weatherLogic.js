@@ -13,6 +13,8 @@ export default function useWeatherLogic() {
         maxFav: false,
         loading: false,
         menuOpen: false,
+        error: false,
+        errorMessage: '',
 
     })
 
@@ -52,13 +54,17 @@ export default function useWeatherLogic() {
     const getInformation = async (useCoordinates = false) => {
         try {
             state.loading = true;
+            state.error = false;
             const coordinates = useCoordinates ? await getCoordinates() : null;
             const currentWeatherData = useCoordinates ? await getCurrentWeatherByCoordinates(coordinates.lat, coordinates.lon) : await getCurrentWeatherByCity(state.inputName);
             const hourlyForecastData = useCoordinates ? await getHourlyForecastByCoordinates(coordinates.lat, coordinates.lon) : await getHourlyForecastByCity(state.inputName);
             assignData(currentWeatherData, hourlyForecastData)
             state.loading = false;
         } catch (error) {
+            state.error = true;
             console.error('ERROR:' + error);
+        } finally {
+            state.loading = false;
         }
     };
 

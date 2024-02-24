@@ -10,15 +10,11 @@
                 <h2>Weather App</h2>
             </div>
 
-
             <div class="search">
                 <v-btn icon size="x-small" @click="location"><i class="fa-solid fa-location-dot fa-xl btn-text"></i></v-btn>
                 <v-text-field class="text-field" v-model="city" variant="underlined" clear-icon="fas fa-xmark" clearable
-                    append-inner-icon="fas fa-search" @click:append-inner="sendCity"
-                    @keyup.enter="sendCity"></v-text-field>
+                    append-inner-icon="fas fa-search" @click:append-inner="sendCity" @keyup.enter="sendCity" :error-messages="state.errorMessage" ></v-text-field>
             </div>
-
-
             <div class="lastCity-container">
                 <h2>Last search cities</h2>
                 <div v-for="(lastSearche, index) in state.lastSearches" :key="index" class="lastCity">
@@ -40,19 +36,24 @@
             </div>
 
             <div class="theme">
-                <v-switch hide-details="true" :model-value="theme === 'dark'" label="Change theme" @change="toggleTheme"></v-switch>
-                <v-switch hide-details="true" :model-value="style === 'color'" label="Change color" @change="toggleStyle"></v-switch>
+                <v-switch hide-details="true" :model-value="theme === 'dark'" label="Change theme"
+                    @change="toggleTheme"></v-switch>
+                <v-switch hide-details="true" :model-value="style === 'color'" label="Change color"
+                    @change="toggleStyle"></v-switch>
             </div>
         </div>
     </div>
 </template>
 
 <script setup>
+import { onMounted } from 'vue';
 import { ref } from 'vue';
 
 let theme = ref('light');
 let style = ref('simple');
 let city = ref('');
+let storedTheme;
+let storedStyle;
 
 const props = defineProps({
     updateTheme: Function,
@@ -61,6 +62,20 @@ const props = defineProps({
     removeFavoriteCity: Function,
     state: Object
 });
+
+
+onMounted(() => {
+    storedTheme = localStorage.getItem('theme');
+    storedStyle = localStorage.getItem('style');
+
+    if (storedTheme && storedStyle) {
+        theme.value = storedTheme;
+        style.value = storedStyle;
+
+        props.updateTheme(`${theme.value}-${style.value}`);
+    }
+});
+
 
 const closeMenu = () => {
     props.state.menuOpen = false;
@@ -77,13 +92,18 @@ const updateCity = (city) => {
 }
 
 const sendCity = (event) => {
-    
     if (city.value !== "") {
         event.target.blur();
         props.updateCity(city.value);
         city.value = '';
-        closeMenu();
-
+        if (props.state.error) {
+            closeMenu();
+        } else {
+            props.state.errorMessage = "An error has occurred, please try again.";
+            setTimeout(() => {
+                props.state.errorMessage = null;
+            }, 3000);
+        }
     }
 };
 
@@ -99,6 +119,9 @@ const toggleStyle = () => {
 
 const updateThemeStyle = () => {
     props.updateTheme(`${theme.value}-${style.value}`);
+
+    localStorage.setItem('theme', theme.value);
+    localStorage.setItem('style', style.value);
 };
 
 </script>
