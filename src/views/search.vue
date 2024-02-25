@@ -13,7 +13,8 @@
             <div class="search">
                 <v-btn icon size="x-small" @click="location"><i class="fa-solid fa-location-dot fa-xl btn-text"></i></v-btn>
                 <v-text-field class="text-field" v-model="city" variant="underlined" clear-icon="fas fa-xmark" clearable
-                    append-inner-icon="fas fa-search" @click:append-inner="sendCity" @keyup.enter="sendCity" :error-messages="state.errorMessage" ></v-text-field>
+                    append-inner-icon="fas fa-search" @click:append-inner="sendCity" @keyup.enter="sendCity"
+                    :error-messages="state.errorMessage"></v-text-field>
             </div>
             <div class="lastCity-container">
                 <h2>Last search cities</h2>
@@ -91,21 +92,27 @@ const updateCity = (city) => {
     closeMenu();
 }
 
-const sendCity = (event) => {
+const sendCity = async (event) => {
     if (city.value !== "") {
         event.target.blur();
-        props.updateCity(city.value);
+        await props.updateCity(city.value);
         city.value = '';
+
         if (props.state.error) {
-            closeMenu();
-        } else {
-            props.state.errorMessage = "An error has occurred, please try again.";
             setTimeout(() => {
                 props.state.errorMessage = null;
+                props.state.error = false;
             }, 3000);
+        } else {
+            if (window.innerWidth < 1400 && props.state.menuOpen) {
+                closeMenu();
+            }
         }
     }
 };
+
+
+
 
 const toggleTheme = () => {
     theme.value = theme.value === 'light' ? 'dark' : 'light';

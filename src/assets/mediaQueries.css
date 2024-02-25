@@ -54,6 +54,11 @@
     left: 5em;
   }
 
+  .loading {
+    width: 70%;
+    
+}
+  
   .menu-container {
     position: absolute;
     top: 0;

@@ -30,26 +30,20 @@ let intervalId;
 onMounted(() => {
 
     getInformation();
-
     intervalId = setInterval(getInformation, 300 * 1000);
+    window.addEventListener('resize', updateMenuState);
+    updateMenuState();
 });
 
 onUnmounted(() => {
     clearInterval(intervalId);
+    window.removeEventListener('resize', updateMenuState);
 });
 
-</script>
-
-<style scoped>
-.loading {
-    height: 100%;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: linear-gradient(145deg, var(--box-shadow), var(--box-light));
-    color: var(--text-color);
+function updateMenuState() {
+    state.menuOpen = window.innerWidth > 1400;
 }
-</style>
+
+</script>
 
   

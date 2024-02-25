@@ -95,6 +95,15 @@
     }
 }
 
+.loading {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: var(--background-color);
+    color: var(--text-color);
+}
 
 .menu-container {
     position: absolute;

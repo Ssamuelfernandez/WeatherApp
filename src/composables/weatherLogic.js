@@ -54,7 +54,6 @@ export default function useWeatherLogic() {
     const getInformation = async (useCoordinates = false) => {
         try {
             state.loading = true;
-            state.error = false;
             const coordinates = useCoordinates ? await getCoordinates() : null;
             const currentWeatherData = useCoordinates ? await getCurrentWeatherByCoordinates(coordinates.lat, coordinates.lon) : await getCurrentWeatherByCity(state.inputName);
             const hourlyForecastData = useCoordinates ? await getHourlyForecastByCoordinates(coordinates.lat, coordinates.lon) : await getHourlyForecastByCity(state.inputName);
@@ -62,7 +61,9 @@ export default function useWeatherLogic() {
             state.loading = false;
         } catch (error) {
             state.error = true;
+            state.errorMessage = "An error has occurred, please try again.";
             console.error('ERROR:' + error);
+            console.log('Despues del error',state.error);
         } finally {
             state.loading = false;
         }
