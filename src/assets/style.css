@@ -320,5 +320,19 @@
         -10px -10px 30px var(--box-light);
 }
 
+.madeBy {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.3em;
+}
+
+.madeBy a {
+    color: rgb(32, 116, 212)
+}
+
+.madeBy a:hover {
+    color: brown;
+}
 
 

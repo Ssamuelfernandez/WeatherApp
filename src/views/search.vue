@@ -42,6 +42,7 @@
                 <v-switch hide-details="true" :model-value="style === 'color'" label="Change color"
                     @change="toggleStyle"></v-switch>
             </div>
+            <p class="madeBy">Made with <i class="fa-solid fa-heart"></i> by <a href="https://github.com/Ssamuelfernandez">Ssamuelfernandez</a></p>
         </div>
     </div>
 </template>

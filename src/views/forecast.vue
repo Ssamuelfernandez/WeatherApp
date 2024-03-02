@@ -17,7 +17,7 @@
                         </div>
                         <div class="forecastHours">
                             <h2>{{ getDateInfo(forecast.dt).time }}</h2>
-                            
+
                             <div class="more-info-forecast">
                                 <i class="fa-solid fa-temperature-quarter"></i>
                                 <p>{{ forecast.main.temp }}°C</p>
@@ -41,6 +41,7 @@
             </div>
 
         </div>
+
     </div>
 </template>
 
