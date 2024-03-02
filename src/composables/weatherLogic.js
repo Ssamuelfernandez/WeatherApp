@@ -59,6 +59,7 @@ export default function useWeatherLogic() {
             const hourlyForecastData = useCoordinates ? await getHourlyForecastByCoordinates(coordinates.lat, coordinates.lon) : await getHourlyForecastByCity(state.inputName);
             assignData(currentWeatherData, hourlyForecastData)
             state.loading = false;
+            console.log(hourlyForecastData);
         } catch (error) {
             state.error = true;
             state.errorMessage = "An error has occurred, please try again.";

@@ -11,10 +11,26 @@
                     <v-window-item v-for="(forecast, index) in forecasts" :key="forecast.dt" :value="index"
                         class="week-items">
 
-                        <h3>{{ getDateInfo(forecast.dt).time }}</h3>
 
-                        <img :src="forecast.iconData" alt="Weather icon">
-                        <p>{{ forecast.main.temp }}°C</p>
+                        <div class="forecastCurrentIcon">
+                            <img :src="forecast.iconData" alt="Weather icon">
+                        </div>
+                        <div class="forecastHours">
+                            <h2>{{ getDateInfo(forecast.dt).time }}</h2>
+                            
+                            <div class="more-info-forecast">
+                                <i class="fa-solid fa-temperature-quarter"></i>
+                                <p>{{ forecast.main.temp }}°C</p>
+                            </div>
+                            <div class="more-info-forecast">
+                                <i class="fa-solid fa-hand-holding-droplet"></i>
+                                <p>{{ forecast.main.humidity }}%</p>
+                            </div>
+
+
+
+                        </div>
+
 
                     </v-window-item>
                 </v-window>
