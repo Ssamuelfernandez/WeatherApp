@@ -32,7 +32,7 @@ Neomorph Weather App is designed with a neomorphic style that has been trending 
 
 
 ## 🧰 Demo
-<h3><a href="ssamuelfernandez.github.io/WeatherApp/">View Demo</a><h3/>
+<h3><a href="https://ssamuelfernandez.github.io/WeatherApp/">View Demo</a><h3/>
 
 
 ## 💻 Tech Stack
